@@ -1,6 +1,10 @@
 import { useState } from 'react'
 
-function Register() {
+interface RegisterProps {
+  setCurrentPage: React.Dispatch<React.SetStateAction<0 | 1 | 2>>;
+}
+
+function Register({setCurrentPage}: RegisterProps) {
 
   return (
     <>

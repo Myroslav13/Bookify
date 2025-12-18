@@ -11,8 +11,8 @@ function App() {
 
   return (
     <>
-      {currentPage === 0 ? <Login currentPage = {currentPage} setCurrentPage = {setCurrentPage}></Login> : null}
-      {currentPage === 1 ? <Register></Register> : null}
+      {currentPage === 0 ? <Login setCurrentPage = {setCurrentPage}></Login> : null}
+      {currentPage === 1 ? <Register setCurrentPage = {setCurrentPage}></Register> : null}
       {currentPage === 2 ? <Main></Main> : null}
     </>
   )
