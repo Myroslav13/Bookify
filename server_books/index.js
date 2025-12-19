@@ -6,7 +6,7 @@ const app = express();
 const port = 3500;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const db = new pg.Client({
     user: "postgres",

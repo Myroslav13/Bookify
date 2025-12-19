@@ -5,12 +5,13 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: white;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
 }
 
 a {
@@ -20,14 +21,6 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -65,4 +58,68 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  width: 300px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+label {
+  color: black;
+}
+
+input {
+  border-radius: 20px;
+  background-color: rgb(236, 234, 234);
+  color: gray;
+  border: none;
+}
+
+input[type="text"], input[type="password"] {
+  padding-left: 15px;
+  height: 40px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+  outline: none;
+}
+
+input[type="submit"] {
+  background-color: #2196f5;
+  color: white;
+  font-weight: bold;
+  height: 45px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #1068b1;
+  color: lightgray;
+}
+
+.form-block {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 10px 0px;
+  color: black;
 }
