@@ -6,22 +6,26 @@ interface RegisterProps {
 }
 
 function Register({setCurrentPage}: RegisterProps) {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
       
-    if (username !== "" && password !== "") {
-      const response = await axios.post('http://localhost:3000/register', { "username":username, "password":password });
+    if (email !== "" && password !== "") {
+      if (password.length < 6) {
+        alert("You password contains less than 6 symbols. Make it bigger");
+        return;
+      }
+
+      const response = await axios.post('http://localhost:3000/register', { "email":email, "password":password });
       const data = response.data;
-      console.log(data);
 
       if (data !== false) {
         setCurrentPage(2);
         alert("You have registered successfully!");
       } else {
-        setUsername("");
+        setEmail("");
         setPassword("");
         alert("This username is already used");
       }
@@ -34,7 +38,7 @@ function Register({setCurrentPage}: RegisterProps) {
     <>
       <form method="post" action="/register" onSubmit={(e) => handleSubmit(e)}>
         <h1>Welcome</h1>
-        <input type="text" placeholder="Username" name="username" onChange={(e) => setUsername(e.target.value)} value={username}/>
+        <input type="email" placeholder="Email" name="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
         <input type="password" placeholder="Password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
         <input type="submit" value={"Register"}/>
       </form>

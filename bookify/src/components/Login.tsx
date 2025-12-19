@@ -6,14 +6,14 @@ interface LoginProps {
 }
 
 function Login({ setCurrentPage }: LoginProps) {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     
-    if (username !== "" && password !== "") {
-      const response = await axios.get('http://localhost:3000/login', { params: { username, password } });
+    if (email !== "" && password !== "") {
+      const response = await axios.get('http://localhost:3000/login', { params: { email, password } });
       const data = response.data;
       console.log(data);
 
@@ -21,7 +21,7 @@ function Login({ setCurrentPage }: LoginProps) {
         setCurrentPage(2);
         alert("You have entered successfully!");
       } else {
-        setUsername("");
+        setEmail("");
         setPassword("");
         alert("Your login or password is incorrect!");
       }
@@ -34,7 +34,7 @@ function Login({ setCurrentPage }: LoginProps) {
     <>
       <form method="post" action="/login" onSubmit={(e) => handleSubmit(e)}>
         <h1>Login</h1>
-        <input type="text" placeholder="Username" name="username" onChange={(e) => setUsername(e.target.value)} value={username}/>
+        <input type="email" placeholder="Email" name="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
         <input type="password" placeholder="Password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
         <input type="submit" value={"Sign In"}/>
         <p onClick={() => setCurrentPage(1)}>You haven't registered yet?</p>

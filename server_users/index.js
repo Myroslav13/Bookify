@@ -20,10 +20,10 @@ const db = new pg.Client({
 db.connect();
 
 app.get("/login", async (req, res) => {
-  const username = req.query.username;
+  const email = req.query.email;
   const password = req.query.password;
 
-  const response = await db.query("SELECT password FROM users WHERE email = $1", [username]);
+  const response = await db.query("SELECT password FROM users WHERE email = $1", [email]);
 
   if (response.rows.length === 0) {
     res.send(false);
@@ -38,11 +38,11 @@ app.get("/login", async (req, res) => {
 });
 
 app.post("/register", async (req, res) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
 
   try {
-    const response = await db.query("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id", [username, password]);
+    const response = await db.query("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id", [email, password]);
     const newUserId = response.rows[0].id;
 
     if (newUserId != null) {
