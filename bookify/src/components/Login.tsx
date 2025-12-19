@@ -26,10 +26,11 @@ function Login({ setCurrentPage }: LoginProps) {
   return (
     <>
       <form method="post" action="/login" onSubmit={(e) => handleSubmit(e)}>
-        <h1>Welcome</h1>
+        <h1>Login</h1>
         <input type="text" placeholder="Username" name="username" onChange={(e) => setUsername(e.target.value)} value={username}/>
         <input type="password" placeholder="Password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
         <input type="submit" value={"Sign In"}/>
+        <p onClick={() => setCurrentPage(1)}>You haven't registered yet?</p>
       </form>
     </>
   )
