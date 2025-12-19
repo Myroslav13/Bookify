@@ -11,15 +11,22 @@ function Register({setCurrentPage}: RegisterProps) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const response = await axios.post('http://localhost:3000/register', { "username":username, "password":password });
-    const data = response.data;
-    console.log(data);
+      
+    if (username !== "" && password !== "") {
+      const response = await axios.post('http://localhost:3000/register', { "username":username, "password":password });
+      const data = response.data;
+      console.log(data);
 
-    if (data !== false) {
-      setCurrentPage(2);
+      if (data !== false) {
+        setCurrentPage(2);
+        alert("You have registered successfully!");
+      } else {
+        setUsername("");
+        setPassword("");
+        alert("This username is already used");
+      }
     } else {
-      setUsername("");
-      setPassword("");
+      alert("Please enter your username and password!");
     }
   }
 

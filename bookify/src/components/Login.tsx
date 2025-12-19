@@ -11,15 +11,22 @@ function Login({ setCurrentPage }: LoginProps) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const response = await axios.get('http://localhost:3000/login', { params: { username, password } });
-    const data = response.data;
-    console.log(data);
+    
+    if (username !== "" && password !== "") {
+      const response = await axios.get('http://localhost:3000/login', { params: { username, password } });
+      const data = response.data;
+      console.log(data);
 
-    if (data == true) {
-      setCurrentPage(2);
+      if (data == true) {
+        setCurrentPage(2);
+        alert("You have entered successfully!");
+      } else {
+        setUsername("");
+        setPassword("");
+        alert("Your login or password is incorrect!");
+      }
     } else {
-      setUsername("");
-      setPassword("");
+      alert("Please enter your username and password!");
     }
   }
 

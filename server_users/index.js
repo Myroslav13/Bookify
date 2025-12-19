@@ -41,11 +41,15 @@ app.post("/register", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  const response = await db.query("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id", [username, password]);
-  const newUserId = response.rows[0].id;
+  try {
+    const response = await db.query("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id", [username, password]);
+    const newUserId = response.rows[0].id;
 
-  if (newUserId != null) {
-    res.send(newUserId);
+    if (newUserId != null) {
+      res.send(newUserId);
+    }
+  } catch (error) {
+    res.send(false);
   }
 
   res.send(false);
