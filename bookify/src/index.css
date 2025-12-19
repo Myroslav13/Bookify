@@ -131,3 +131,19 @@ p {
   cursor: pointer;
   font-size: 14px;
 }
+
+.book-data {
+  border-radius: 20px;
+  width: 700px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: black;
+  padding: 20px;
+}
+
+h4 {
+  color: gray;
+}
+
+h2 {
+  margin-top: 10px;
+}

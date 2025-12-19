@@ -23,15 +23,16 @@ app.get("/login", async (req, res) => {
   const email = req.query.email;
   const password = req.query.password;
 
-  const response = await db.query("SELECT password FROM users WHERE email = $1", [email]);
+  const response = await db.query("SELECT id, password FROM users WHERE email = $1", [email]);
+  const userId = response.rows[0].id;
 
   if (response.rows.length === 0) {
-    res.send(false);
+    res.send(userId);
   }
 
   const storedPassword = response.rows[0].password;
   if (storedPassword == password) {
-    res.send(true);
+    res.send(userId);
   } else {
     res.send(false);
   }

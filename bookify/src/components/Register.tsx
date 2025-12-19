@@ -3,9 +3,10 @@ import axios from 'axios';
 
 interface RegisterProps {
   setCurrentPage: React.Dispatch<React.SetStateAction<0 | 1 | 2>>;
+  setCurrentUserId: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function Register({setCurrentPage}: RegisterProps) {
+function Register({setCurrentPage, setCurrentUserId}: RegisterProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,6 +23,7 @@ function Register({setCurrentPage}: RegisterProps) {
       const data = response.data;
 
       if (data !== false) {
+        setCurrentUserId(data);
         setCurrentPage(2);
         alert("You have registered successfully!");
       } else {

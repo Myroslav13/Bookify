@@ -3,9 +3,10 @@ import axios from 'axios'
 
 interface LoginProps {
   setCurrentPage: React.Dispatch<React.SetStateAction<0 | 1 | 2>>;
+  setCurrentUserId: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function Login({ setCurrentPage }: LoginProps) {
+function Login({ setCurrentPage, setCurrentUserId}: LoginProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,9 +16,9 @@ function Login({ setCurrentPage }: LoginProps) {
     if (email !== "" && password !== "") {
       const response = await axios.get('http://localhost:3000/login', { params: { email, password } });
       const data = response.data;
-      console.log(data);
 
-      if (data == true) {
+      if (data !== false) {
+        setCurrentUserId(data);
         setCurrentPage(2);
         alert("You have entered successfully!");
       } else {
