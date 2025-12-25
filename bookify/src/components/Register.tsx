@@ -37,14 +37,14 @@ function Register({setCurrentPage, setCurrentUserId}: RegisterProps) {
   }
 
   return (
-    <>
-      <form method="post" action="/register" onSubmit={(e) => handleSubmit(e)}>
+    <div className='auth-page'>
+      <form method="POST" action="/register" onSubmit={(e) => handleSubmit(e)}>
         <h1>Welcome</h1>
         <input type="email" placeholder="Email" name="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
         <input type="password" placeholder="Password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
         <input type="submit" value={"Register"}/>
       </form>
-    </>
+    </div>
   )
 }
 

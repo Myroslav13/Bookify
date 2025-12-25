@@ -30,7 +30,7 @@ app.get("/getAll", async (req, res) => {
         res.status(400).json({ message: `There's no user or books of user with id = ${userId}` });
     }
 
-    res.json(data);
+    res.status(200).json(data);
 });
 
 app.get("/get/:id", async (req, res) => {
@@ -42,7 +42,7 @@ app.get("/get/:id", async (req, res) => {
         res.status(400).json({ message: `There's no book with id = ${bookId}` });
     }
 
-    res.json(data);
+    res.status(200).json(data);
 });
 
 app.post("/add", async (req, res) => {

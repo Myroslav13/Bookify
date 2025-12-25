@@ -32,7 +32,7 @@ function Login({ setCurrentPage, setCurrentUserId}: LoginProps) {
   }
 
   return (
-    <>
+    <div className='auth-page'>
       <form method="post" action="/login" onSubmit={(e) => handleSubmit(e)}>
         <h1>Login</h1>
         <input type="email" placeholder="Email" name="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
@@ -40,7 +40,7 @@ function Login({ setCurrentPage, setCurrentUserId}: LoginProps) {
         <input type="submit" value={"Sign In"}/>
         <p onClick={() => setCurrentPage(1)}>You haven't registered yet?</p>
       </form>
-    </>
+    </div>
   )
 }
 
