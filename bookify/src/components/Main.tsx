@@ -18,7 +18,7 @@ function Main({currentUserId}: MainProps) {
   const [allBooks, setAllBooks] = useState<Book[]>([]);
 
   async function gettingAllBooks() {
-    const response = await axios.get("http://localhost:3500/all", { params: { id: currentUserId } });
+    const response = await axios.get("http://localhost:3500/getAll", { params: { id: currentUserId } });
     const data = response.data;
     setAllBooks(data);
     console.log(currentUserId, data);
@@ -28,8 +28,8 @@ function Main({currentUserId}: MainProps) {
 
   return (
     <>
-      <h1>main</h1>
-      <div>
+      <h1>Your books</h1>
+      <div className='container-books'>
         {allBooks.map(el => (
           <div key={el.id} className='book-data'>
             <h2>«{el.name}» by {el.author}</h2>

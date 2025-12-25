@@ -1,25 +1,27 @@
 import express from 'express';
 import pg from 'pg';
 import cors from 'cors';
+import env from 'dotenv';
 
 const app = express();
 const port = 3500;
 
+env.config();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const db = new pg.Client({
-    user: "postgres",
-    host: "localhost",
-    database: "Udemy",
-    password: "myroslav13",
-    port: 5432,
+  user: process.env.USER_NAME,
+  host: process.env.HOST_NAME,
+  database: process.env.DB_NAME,
+  password: process.env.PASSWORD,
+  port: 5432,
 });
 
 db.connect();
 
-app.get("/all", async (req, res) => {
+app.get("/getAll", async (req, res) => {
     const userId = req.query.id;
     const response = await db.query("SELECT id, name, author, reaction, rate, date_read FROM books WHERE user_id = $1", [userId]);
     const data = response.rows;
@@ -31,7 +33,7 @@ app.get("/all", async (req, res) => {
     res.json(data);
 });
 
-app.get("/:id", async (req, res) => {
+app.get("/get/:id", async (req, res) => {
     const bookId = req.params.id;
     const response = await db.query("SELECT id, name, author, reaction, rate, date_read FROM books WHERE id = $1", [bookId]);
     const data = response.rows[0];

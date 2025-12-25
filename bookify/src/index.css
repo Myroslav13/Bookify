@@ -61,7 +61,7 @@ button:focus-visible {
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -119,9 +119,16 @@ input[type="submit"]:hover {
 }
 
 h1 {
-  font-size: 22px;
-  margin: 10px 0px;
+  margin: 20px 0px 0px 0px;
   color: black;
+  font-size: 28px;
+  text-align: center;
+}
+
+form h1 {
+  margin: 10px 0px;
+  font-size: 22px;
+  text-align: left;
 }
 
 p {
@@ -133,7 +140,7 @@ p {
 }
 
 .book-data {
-  border-radius: 20px;
+  border-radius: 10px;
   width: 700px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   color: black;
@@ -146,4 +153,11 @@ h4 {
 
 h2 {
   margin-top: 10px;
+}
+
+.container-books {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 0px;
 }
