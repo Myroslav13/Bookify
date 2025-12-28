@@ -23,7 +23,7 @@ db.connect();
 
 app.get("/getAll", async (req, res) => {
     const userId = req.query.id;
-    const response = await db.query("SELECT id, name, author, reaction, rate, date_read FROM books WHERE user_id = $1", [userId]);
+    const response = await db.query("SELECT id, name, author, reaction, rate, date_read FROM books WHERE user_id = $1 ORDER BY id ASC", [userId]);
     const data = response.rows;
 
     if (data.length === 0) {
