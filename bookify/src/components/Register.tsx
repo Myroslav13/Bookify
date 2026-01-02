@@ -44,6 +44,10 @@ function Register({setCurrentPage, setCurrentUserId}: RegisterProps) {
         <input type="password" placeholder="Password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
         <input type="submit" value={"Register"}/>
       </form>
+      <a className="btn btn-block" href="/auth/google">
+        <i className="fab fa-google"></i>
+        Sign Up with Google
+      </a>
     </div>
   )
 }

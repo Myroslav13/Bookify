@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import axios from 'axios';
 
 interface ModalProps {
@@ -14,6 +14,7 @@ function Modal({bookToEdit, currentUserId, setShowBook, gettingAllBooks}: ModalP
   const [bookReaction, setBookReaction] = useState<string>("");
   const [bookRate, setBookRate] = useState<number>(1);
   const [bookDate, setBookDate] = useState<string>("");
+  const overlayRef = useRef<HTMLDivElement | null>(null);
 
   function toInputDate(value: string) {
     if (!value) return "";
@@ -70,9 +71,15 @@ function Modal({bookToEdit, currentUserId, setShowBook, gettingAllBooks}: ModalP
     }
   }, [bookToEdit]);
 
+  function handleOverlayClick(e: React.MouseEvent<HTMLDivElement>) {
+    if (e.target === overlayRef.current) {
+      setShowBook(false);
+    }
+  }
+
   return (
-    <div className="modalOverlay">
-        <form method="POST" action="/add" onSubmit={(e) => handleSubmit(e)} className='form-add'>
+    <div className="modalOverlay" ref={overlayRef} onClick={handleOverlayClick}>
+        <form method="POST" action="/add" onSubmit={(e) => handleSubmit(e)} className='form-add' onClick={(e) => e.stopPropagation()}>
             <input type='text' name='name' placeholder='Book name' onChange={(e) => setBookName(e.target.value)} value={bookName}></input>
             <input type='text' name='author' placeholder='Book author' onChange={(e) => setBookAuthor(e.target.value)} value={bookAuthor}></input>
             <input type='text' name='reaction' placeholder='Reaction' onChange={(e) => setBookReaction(e.target.value)} value={bookReaction}></input>
