@@ -57,6 +57,10 @@ function Login() {
                You haven't registered yet?
             </p>
          </form>
+          <a className="btn btn-block" href="http://localhost:3000/auth/google">
+            <i className="fab fa-google"></i>
+            Login with Google
+         </a>
       </div>
    );
 }

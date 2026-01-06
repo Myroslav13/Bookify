@@ -19,7 +19,7 @@ function Main() {
 
    async function handleDelete(id: number) {
       try {
-         await axios.delete(`http://localhost:3500/delete/${id}`);
+         await axios.delete(`http://localhost:3500/delete/${id}`, { withCredentials: true });
          await gettingAllBooks();
       } catch (err) {
          console.error("Failed to delete", err);
@@ -48,6 +48,7 @@ function Main() {
 
          const response = await axios.get("http://localhost:3500/getAll", {
             params: { id: userId },
+            withCredentials: true,
          });
          const data = response.data;
          setAllBooks(Array.isArray(data) ? data : []);
@@ -72,38 +73,40 @@ function Main() {
    return (
       <>
          <h1 className="h1-main">Your books</h1>
-         {allBooks.length !== 0 ? (
-            <div className="container-books">
-               {allBooks.map((el) => (
-                  <div key={el.id} className="book-data">
-                     <h2>
-                        «{el.name}» by {el.author}
-                     </h2>
-                     <h4>
-                        Rate: {el.rate}/10. Date read:{" "}
-                        {new Date(el.date_read).toLocaleDateString("uk-UA")}
-                     </h4>
-                     <h4>{el.reaction}</h4>
-                     <div className="container-change">
-                        <button onClick={() => handleEdit(el.id)}>Edit</button>
-                        <button onClick={() => handleDelete(el.id)}>
-                           Delete
-                        </button>
+         <div className="container-books">
+            {allBooks.length !== 0 ? (
+               <>
+                  {allBooks.map((el) => (
+                     <div key={el.id} className="book-data">
+                        <h2>
+                           «{el.name}» by {el.author}
+                        </h2>
+                        <h4>
+                           Rate: {el.rate}/10. Date read:{" "}
+                           {new Date(el.date_read).toLocaleDateString("uk-UA")}
+                        </h4>
+                        <h4>{el.reaction}</h4>
+                        <div className="container-change">
+                           <button onClick={() => handleEdit(el.id)}>Edit</button>
+                           <button onClick={() => handleDelete(el.id)}>
+                              Delete
+                           </button>
+                        </div>
                      </div>
-                  </div>
-               ))}
-            </div>
-         ) : (
-            <p>You still don't have any books? Add one</p>
-         )}
-         <button
-            onClick={() => {
-               setBookToEdit(0);
-               setShowBook(true);
-            }}
-         >
-            Add a new book review
-         </button>
+                  ))}
+               </>
+            ) : (
+               <p>You still don't have any books? Add one</p>
+            )}
+            <button
+               onClick={() => {
+                  setBookToEdit(0);
+                  setShowBook(true);
+               }}
+            >
+               Add a new book review
+            </button>
+         </div>
          {showBook === true ? (
             <Modal
                bookToEdit={bookToEdit}

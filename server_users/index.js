@@ -168,13 +168,18 @@ app.post("/register", async (req, res) => {
          }
 
          const response = await db.query(
-            "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id, email",
+            "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id, email, password",
             [email, hash]
          );
          const user = response.rows[0];
 
          if (user) {
-            return res.status(200).json({ user: { id: user.id, email: user.email } });
+            req.login(user, (err) => {
+               if (err) {
+                  return res.status(400).json({ error: "Registration successful but login failed" });
+               }
+               return res.status(200).json({ user: { id: user.id, email: user.email } });
+            });
          } else {
             return res.status(400).json({ error: "Registration failed" });
          }
@@ -189,6 +194,16 @@ app.get("/me", (req, res) => {
       return res.status(200).json(req.user);
    }
    return res.status(401).json({ message: "You are not authenticated" });
+});
+
+app.post("/logout", (req, res) => {
+   req.logout((err) => {
+      if (err) {
+         return res.status(500).json({message: "Logout failed"});
+      }
+
+      return res.status(200).json({message: "Successfully logged out"});
+   });
 });
 
 passport.serializeUser((user, cb) => {

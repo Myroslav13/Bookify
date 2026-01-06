@@ -30,7 +30,7 @@ function Modal({
    }
 
    async function insertBookData(id: number) {
-      const response = await axios.get(`http://localhost:3500/get/${id}`);
+      const response = await axios.get(`http://localhost:3500/get/${id}`, { withCredentials: true });
       const data = response.data;
       setBookName(data.name);
       setBookAuthor(data.author);
@@ -53,7 +53,7 @@ function Modal({
                reaction: bookReaction,
                rate: bookRate,
                date_read: bookDate,
-            });
+            }, { withCredentials: true });
             text = "Book added successfully!";
          } else {
             response = await axios.put(
@@ -65,7 +65,8 @@ function Modal({
                   reaction: bookReaction,
                   rate: bookRate,
                   date_read: bookDate,
-               }
+               },
+               { withCredentials: true }
             );
             text = "Book edited successfully!";
          }
